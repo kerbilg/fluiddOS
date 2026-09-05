@@ -27,6 +27,8 @@ jobs:
       - name: run build
         run: |
           task build
+        env:
+          COLUMNS: 120
 
       - name: move image
         run: |
