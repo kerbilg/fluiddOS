@@ -1,0 +1,31 @@
+version: '3'
+
+tasks:
+  setup:
+    desc: install build requieremnts
+    platforms: [linux]
+    cmds:
+      - sudo ./armbian-build/compile.sh requirements
+      - sudo chown -R $USER:$USER armbian-build/
+    silent: true
+  copy:
+    desc: copy userpatches
+    cmds:
+      - rsync -av userpatches/ armbian-build/userpatches/
+    silent: true
+  build:
+    desc: build image
+    cmds:
+      - ./armbian-build/compile.sh build fluiddos
+    silent: true
+  get-image:
+    desc: get image
+    cmds:
+      - mv armbian-build/output/images/* output/
+    silent: true
+
+  remove-image:
+    desc: remove image
+    cmds:
+      - rm -f output/*
+    silent: true

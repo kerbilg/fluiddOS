@@ -4,13 +4,32 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest # ubuntu-24.04-arm, ubuntu-24.04-riscv
+    runs-on: ubuntu-latest
+    
     steps:
-      - uses: armbian/build@main
+      - name: clone repository
+        uses: actions/checkout@v4
         with:
-          armbian_token: ${{ secrets.GITHUB_TOKEN }}
-          #armbian_board: "uefi-x86" # orangepi5 bananapif3
-          #armbian_release: "noble" # trixie
-          #armbian_target: "build"
-          #armbian_ui: "minimal" # server xfce
-          armbian_runner_clean: "yes" # recommended for Github runners
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install Task
+        uses: go-task/setup-task@v1
+
+      - name: install requirements
+        run: |
+          task setup
+
+      - name: copy userpatches
+        run: |
+          task copy
+      
+      - name: run build
+        run: |
+          task build
+
+      - name: move image
+        run: |
+          task get-image
+
+      
