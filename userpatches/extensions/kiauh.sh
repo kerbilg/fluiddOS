@@ -9,11 +9,8 @@ function post_customize_image__011_install_stack() {
     chroot_sdcard_apt_get_update
     chroot_sdcard_apt_get_install expect
     
-    chroot_sdcard sudo -H -u fluidd bash /home/fluidd/kiauh/kiauh.sh install klipper --count 1 --create-example-cfg
-    
-    chroot_sdcard sudo -H -u fluidd bash /home/fluidd/kiauh/kiauh.sh install moonraker
-    
-    chroot_sdcard sudo -H -u fluidd bash /home/fluidd/kiauh/kiauh.sh install fluidd
-    
-    chroot_sdcard sudo -H -u fluidd bash /home/fluidd/kiauh/kiauh.sh install fluidd-config
+    chroot_sdcard sudo -H -u fluidd unbuffer bash /home/fluidd/kiauh/kiauh.sh install klipper --count 1 --create-example-cfg
+    chroot_sdcard sudo -H -u fluidd unbuffer bash /home/fluidd/kiauh/kiauh.sh install moonraker
+    chroot_sdcard sudo -H -u fluidd unbuffer bash /home/fluidd/kiauh/kiauh.sh install fluidd
+    chroot_sdcard sudo -H -u fluidd unbuffer bash /home/fluidd/kiauh/kiauh.sh install fluidd-config
 }
